@@ -1,0 +1,65 @@
+
+.background-gradiant{
+    background: linear-gradient(134deg, rgba(3, 9, 29, 0.95) 13.47%, #132059 56.64%, #03091D 90.93%);
+
+}
+.box-gradiant{
+    background: linear-gradient(225deg, rgba(212, 8, 140, 0.70) 14.64%, rgba(204, 8, 140, 0.70) 17.47%, rgba(133, 7, 138, 0.70) 47.17%, rgba(89, 6, 137, 0.70) 68.39%, rgba(72, 6, 137, 0.70) 79%);
+    }
+    
+.blue-gradiant{
+    background: linear-gradient(161deg, rgba(110, 232, 252, 0.70) 5.47%, rgba(106, 226, 251, 0.70) 21.27%, rgba(94, 209, 247, 0.70) 42.01%, rgba(75, 181, 241, 0.70) 65.72%, rgba(48, 142, 232, 0.70) 91.39%, rgba(38, 127, 229, 0.70) 100.28%);
+    }
+
+.glass-gradiant{
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.1px);
+    -webkit-backdrop-filter: blur(2.1px);
+    }
+
+.dashboard-box-gradiant{
+        background: linear-gradient(180deg, rgba(3, 9, 29, 0.64) 0%, rgba(3, 9, 29, 0.00) 100%);
+    }
+
+.contact-box-gradiant{
+    background: linear-gradient(225deg, rgba(212, 8, 140, 0.70) 14.64%, rgba(204, 8, 140, 0.70) 17.47%, rgba(133, 7, 138, 0.70) 47.17%, rgba(89, 6, 137, 0.70) 68.39%, rgba(72, 6, 137, 0.70) 79%);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 10px;
+        border-radius: 30px;
+
+    }
+  
+    /* Add this to your CSS */
+.overflow-hidden::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  
+  .overflow-hidden {
+    scrollbar-width: none;
+  }
+  
+
+  .button-gradient{
+    border-radius: 50px;
+        background: linear-gradient(225deg, #D4088C 14.64%, #CC088C 17.47%, #85078A 47.17%, #590689 68.39%, #480689 79%);
+  }
+
+  .glassG{
+    background: rgba(255, 255, 255, 0.78);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13.2px);
+    -webkit-backdrop-filter: blur(13.2px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+
+
+  .forgott-gradiant{
+    border-radius: 50px;
+background: linear-gradient(225deg, #D4088C 14.64%, #CC088C 17.47%, #85078A 47.17%, #590689 68.39%, #480689 79%);
+  }
+  
