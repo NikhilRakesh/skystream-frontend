@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiMore2Fill } from "react-icons/ri";
 import StreamLink from "./StreamLink";
 import Swal from "sweetalert2";
@@ -42,16 +42,16 @@ function ChannelTab({ ...item }) {
       text: "Are you sure you want to block this channel?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: `${item.isBlocked ? "UnBlock " : "Block"}`,
+      confirmButtonText: `${item.isBlocked ? "UnBlock" : "Block"}`,
       cancelButtonText: "Cancel",
     }).then((result) => {
+
       if (result.isConfirmed) {
         setIsToggled((prev) => !prev);
         axiosInstance
           .post(
-            `/channel/block-channel/${item._id}`,
+            `/channel/block-channel/${item._id}/${item?.client_id}`,
             { blocked: item.isBlocked },
-            { withCredentials: true }
           )
           .then((res) => {
             state.refreshData = !snap.refreshData;
@@ -64,6 +64,7 @@ function ChannelTab({ ...item }) {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire("Cancelled", "Your Channel is safe :)", "info");
       }
+     
     });
   };
 
@@ -74,7 +75,11 @@ function ChannelTab({ ...item }) {
           <h1>{item.name}</h1>
         </div>
         <div className=" w-2/12 flex justify-center  ">
-          <h1 className="text-red">Live</h1>
+          {item.Live ? (
+            <h1 className="text-red">Live</h1>
+          ) : (
+            <h1 className="text-gray">Live</h1>
+          )}
         </div>
         <div className="flex w-4/12  justify-center items-center  text-sm">
           <h1 className="text-black text-base truncate">Streamkey : </h1>{" "}

@@ -14,14 +14,16 @@ function OutercomponentDashboard() {
  const fetchData = ()=>{
    setTimeout(()=>{
     axiosInstance 
-      .get(`/stats/live-now/${snap.userId}`)
+      .get(`/stats/live-now/${snap.userId}`)   
       .then((res) => {
-        setLoading(false);
-        if (res.data.data.length === 0) {
+        setLoading(false); 
+        console.log('res',res);           
+        
+        if (res.data.length === 0) {
           return setLive([]);
         }
        
-        setLive(res.data.data);
+        setLive(res.data);
       })
       .catch((err) => console.log(err));
    },1000)

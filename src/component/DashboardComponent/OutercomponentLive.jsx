@@ -1,42 +1,40 @@
-import LiveTabs from './LiveTabs'
-import { useEffect, useState } from 'react'
-import axiosInstance from '../../../Axios'
-import SkelitonList from './SkelitonList'
-import { useSnapshot } from 'valtio'
-import state from '../../store'
+import LiveTabs from "./LiveTabs";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../../Axios";
+import SkelitonList from "./SkelitonList";
+import { useSnapshot } from "valtio";
+import state from "../../store";
 
 function OutercomponentLive() {
+  const snap = useSnapshot(state);
 
-  const snap = useSnapshot(state)
-
-  const [live, setLive] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [live, setLive] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axiosInstance
       .get(`/stats/live-now/${snap?.userData?._id}`)
       .then((res) => {
         setLoading(false);
-        if (res.data.data.length === 0) {
+        if (res.data.length === 0) {
           return setLive([]);
         }
-        setLive(res.data.data);
 
+        setLive(res.data);
       })
       .catch((err) => console.log(err));
-  }, [snap.userId])
+  }, [snap.userId]);
 
   return (
     <>
       <div className="bg-gray relative">
         <div className="w-full px-24 py-5 bg-white ">
           <div className="header flex justify-between  font-bold border-b-2 pb-10">
-            <div className="name  flex    w-1/12 ">
+            <div className="name  flex  w-1/12 ">
               <p>NAME</p>
-
             </div>
             <div className="name  justify-center flex   w-3/12 ">
-              <p className=''>Start Time</p>
+              <p className="">Start Time</p>
             </div>
             <div className="name  justify-center flex   w-2/12 ">
               Stream status
@@ -64,9 +62,9 @@ function OutercomponentLive() {
           </div>
         </div>
       </div>
-      { }
+      {}
     </>
   );
 }
 
-export default OutercomponentLive
+export default OutercomponentLive;

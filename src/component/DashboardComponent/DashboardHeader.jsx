@@ -8,19 +8,19 @@ import { useSnapshot } from "valtio";
 function DashboardHeader() {
   const value = state.currentTab;
   const navigate = useNavigate();
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(state);
   const logout = () => {
     axiosInstance
       .post("/auth/logout", {})
       .then((res) => {
-        console.log('response');
+        console.log("response");
         localStorage.removeItem("user");
         localStorage.removeItem("user_id");
         state.userData = null;
         state.userId = null;
         navigate("/");
       })
-      .catch((err) => console.log(err));    
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -30,16 +30,16 @@ function DashboardHeader() {
           {value == "dashboard"
             ? "Dashboard"
             : value === "inbox"
-              ? "Inbox"
-              : value === "user"
-                ? "Users"
-                : value === "channel"
-                  ? "Channel"
-                  : value === "live"
-                    ? "Live"
-                    : value === "settings"
-                      ? "Settings"
-                      : "Dashboard"}
+            ? "Inboxssss"
+            : value === "user"
+            ? "Users"
+            : value === "channel"
+            ? "Channel"
+            : value === "live"
+            ? "Live"
+            : value === "settings"
+            ? "Settings"
+            : "Dashboard"}
         </h1>
       </div>
       <div className="left flex items-center gap-6">

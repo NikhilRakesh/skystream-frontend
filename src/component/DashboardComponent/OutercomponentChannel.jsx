@@ -20,6 +20,7 @@ function OutercomponentChannel() {
   const [searchQuery, setSearchQuery] = useState(""); // New state for search query
   const snap = useSnapshot(state);
 
+
   const handleChange = (e) => {
     setDomain(e.target.value);
   };
@@ -71,10 +72,12 @@ function OutercomponentChannel() {
       });
   };
 
+
+
   useEffect(() => {
     handlePermission();
     axiosInstance
-      .get(`/channel/${snap?.userData?._id}`)
+      .get(`/channel/${snap?.userData?._id}`)   
       .then((res) => {
         setChannel(res.data);
       })
@@ -89,9 +92,9 @@ function OutercomponentChannel() {
         }
         console.log(err);
       });
+      
   }, [snap.refreshData, snap.userId]);
 
-  console.log(channel.data);
 
   const filteredChannels = channel?.data?.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -172,7 +175,7 @@ function OutercomponentChannel() {
           </div>
         ) : (
           filteredChannels?.map((item, index) => (
-            <ChannelTab key={index} {...item} />
+            <ChannelTab key={index} {...item}  />
           ))
         )}
       </div>
