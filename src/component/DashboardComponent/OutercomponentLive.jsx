@@ -1,6 +1,6 @@
 import LiveTabs from "./LiveTabs";
 import { useEffect, useState } from "react";
-import axiosInstance from "../../../Axios";
+import axiosInstance, { StreambaseURL } from "../../../Axios";
 import SkelitonList from "./SkelitonList";
 import { useSnapshot } from "valtio";
 import state from "../../store";
@@ -10,8 +10,21 @@ function OutercomponentLive() {
 
   const [live, setLive] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [bandWidthData, setbandWidthData] = useState([]);
+
+  const FetchBandwidth = () => {
+    fetch(`${StreambaseURL}v1/clients/?count=10000`)
+      .then((res) => res.json())
+      .then((data) => {
+        setbandWidthData(data.clients);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
+    FetchBandwidth();
     axiosInstance
       .get(`/stats/live-now/${snap?.userData?._id}`)
       .then((res) => {
@@ -54,10 +67,15 @@ function OutercomponentLive() {
           <div className="tabs flex flex-col gap-2 ">
             {loading ? (
               <SkelitonList />
-            ) : live && Array.isArray(live) && live.length === 0 ? (
+            ) : live &&
+              Array.isArray(live) &&
+              live.length === 0 &&
+              bandWidthData.length !== 0 ? (
               <div>No one is live</div>
             ) : (
-              live?.map((item, index) => <LiveTabs key={index} {...item} />)
+              live?.map((item, index) => (
+                <LiveTabs key={index} {...item} bandWidthData={bandWidthData} />
+              ))
             )}
           </div>
         </div>

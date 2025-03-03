@@ -30,7 +30,7 @@ function DashboardHeader() {
           {value == "dashboard"
             ? "Dashboard"
             : value === "inbox"
-            ? "Inboxssss"
+            ? "Inbox"
             : value === "user"
             ? "Users"
             : value === "channel"

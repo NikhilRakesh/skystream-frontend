@@ -23,7 +23,7 @@ function Sidebar() {
     { Component: <Inbox />, name: "Inbox",value: "inbox" },
     { conponent: <Users />, name: "Users",value: "user" },
     { component: <Channel />, name: "Channel",value: "channel" },
-    { component: <Live />, name: "Live",value: "live" },
+    { component: <Live />, name: "Live",value: "lives" },
     { componet: <Settings />, name: "Domain",value: "domain" },
   ];
 
@@ -31,7 +31,7 @@ function Sidebar() {
     { Component: <Dash />, name: "Dashboard", value: "dashboard" },
     { conponent: <Users />, name: "Users", value: "user" },
     { component: <Channel />, name: "Channel", value: "channel" },
-    { component: <Live />, name: "Live", value: "live" },
+    { component: <Live />, name: "Live", value: "lives" },
   ];
 
   const handleNavigate =(value,name)=>{

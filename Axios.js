@@ -9,4 +9,6 @@ const axiosInstance = axios.create({
   },
 });
 
+export  const  StreambaseURL= "https://live.skystream.in/api/"
+
 export default axiosInstance;

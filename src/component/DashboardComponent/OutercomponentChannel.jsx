@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ChannelTab from "./ChannelTab";
-import axiosInstance from "../../../Axios";
+import axiosInstance, { StreambaseURL } from "../../../Axios";
 import { useSnapshot } from "valtio";
 import state from "../../store";
 import SkelitonList from "./SkelitonList";
@@ -17,9 +17,8 @@ function OutercomponentChannel() {
   const [createChannel, setCreateChannel] = useState(false);
   const [domainerror, setDomainerror] = useState({});
   const [userPermision, setUserPermison] = useState({});
-  const [searchQuery, setSearchQuery] = useState(""); // New state for search query
+  const [searchQuery, setSearchQuery] = useState("");
   const snap = useSnapshot(state);
-
 
   const handleChange = (e) => {
     setDomain(e.target.value);
@@ -72,12 +71,10 @@ function OutercomponentChannel() {
       });
   };
 
-
-
   useEffect(() => {
     handlePermission();
     axiosInstance
-      .get(`/channel/${snap?.userData?._id}`)   
+      .get(`/channel/${snap?.userData?._id}`)
       .then((res) => {
         setChannel(res.data);
       })
@@ -92,9 +89,7 @@ function OutercomponentChannel() {
         }
         console.log(err);
       });
-      
   }, [snap.refreshData, snap.userId]);
-
 
   const filteredChannels = channel?.data?.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -175,7 +170,7 @@ function OutercomponentChannel() {
           </div>
         ) : (
           filteredChannels?.map((item, index) => (
-            <ChannelTab key={index} {...item}  />
+            <ChannelTab key={index} {...item} />
           ))
         )}
       </div>

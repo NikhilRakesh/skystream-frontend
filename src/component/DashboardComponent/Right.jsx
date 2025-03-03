@@ -16,7 +16,7 @@ function Right() {
       <Route path='/dashboard' element={<OutercomponentDashboard />} />
       <Route path='/inbox' element={<OutercomponentInbox /> } />
       <Route path='/user' element={<OutercomponentUser />} />
-      <Route path='/live' element={<OutercomponentLive />} />
+      <Route path='/lives' element={<OutercomponentLive />} />
       <Route path='/channel' element={<OutercomponentChannel />}/>
       <Route path='/domain' element={<OutercomponentDomain />}/>
       <Route path='*' element={<PageNotFound/>}/>
