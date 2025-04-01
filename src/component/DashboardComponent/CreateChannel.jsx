@@ -19,7 +19,9 @@ const CreateChannel = ({ value, handleClose }) => {
     axiosInstance
       .get(`/domain/${snap?.userData?._id}`)
       .then((res) => {
-        setDomainData(res.data.domain);
+
+        const data = res.data.domains;
+        setDomainData(Array.isArray(data) ? data : [data]);
       })
       .catch((err) => {
         console.log("Error: ", err);
@@ -34,10 +36,10 @@ const CreateChannel = ({ value, handleClose }) => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-   
+
     setFormData({ ...formData, [id]: value });
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let error = ChannelValidation(formData);
@@ -60,9 +62,8 @@ const CreateChannel = ({ value, handleClose }) => {
             );
           }
         });
-    } 
+    }
   };
-
 
   return (
     <div className="fixed inset-0 left-auto right-auto h-screen w-[90%]  justify-center flex items-center z-10 ">
@@ -116,8 +117,8 @@ const CreateChannel = ({ value, handleClose }) => {
                 >
                   <option value="">Select Domain</option>
                   {domaindata?.map((item, index) => (
-                    <option key={index} value={item.domain}>
-                      {item.domain}
+                    <option key={index} value={item?.domain}>
+                      {item?.domain}
                     </option>
                   ))}
                 </select>

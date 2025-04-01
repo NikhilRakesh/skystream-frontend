@@ -7,13 +7,11 @@ import { useSnapshot } from "valtio";
 import state from "../../store";
 
 function Meter() {
-  // eslint-disable-next-line no-unused-vars
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const snap = useSnapshot(state);
 
   useEffect(() => {
-    setInterval(() => {
       axiosInstance
         .get("/stats/system")
         .then((res) => {
@@ -23,7 +21,6 @@ function Meter() {
         .catch((err) => {
           console.log(err);
         });
-    }, 50000);
   }, []);
 
   return (

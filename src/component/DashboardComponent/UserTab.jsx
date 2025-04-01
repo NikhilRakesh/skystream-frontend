@@ -11,12 +11,14 @@ import axiosInstance from "../../../Axios";
 import state from "../../store";
 import { useSnapshot } from "valtio";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 
 function UserTab({ ...item }) {
   const [show, setShow] = useState(false);
   const [view, setView] = useState(false);
   const [userDetailsMenu, setUserDetailsMenu] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [newPassword, setNewPassword] = useState(item.password);
   const snap = useSnapshot(state);
 
   const [permissions, setPermissions] = useState({
@@ -45,9 +47,12 @@ function UserTab({ ...item }) {
     setPermissions({ ...permissions, [name]: newValue });
   };
 
+
   useEffect(() => {
     handlePermission();
   }, [permissions]);
+  console.log(item);
+  
 
   const handleDelete = () => {
     Swal.fire({
@@ -81,6 +86,34 @@ function UserTab({ ...item }) {
     });
   };
 
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handlePasswordChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+  const handleSave = () => {
+    console.log("New Password: ", newPassword);
+    
+    axiosInstance
+      .put(`users/changepassword/${snap.userId}/${item._id}`, {
+        newPassword: newPassword,  
+      })
+      .then((res) => {
+        state.refreshData = !snap.refreshData;
+        Swal.fire("Password!", "Your password has been changed.", "success");
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 401) {
+          Swal.fire("Not Authorized", "You are not authorized to change the password.", "error");
+        }
+      });
+    setIsEditing(false);
+  };
+
   return (
     <div className="bg-white ">
       <div
@@ -109,9 +142,34 @@ function UserTab({ ...item }) {
               <h1 className="font-extrabold">Email :</h1>
               <h1>{item.email}</h1>
             </div>
-            <div className="W-24 flex gap-3">
+            <div className="W-24 flex gap-3 items-center">
               <h1 className="font-extrabold">Password :</h1>
-              <h1>{item.password}</h1>
+              <div className="w-fit flex gap-1">
+                {isEditing ? (
+                  <>
+                    <input
+                      type="text"
+                      value={newPassword}
+                      onChange={handlePasswordChange}
+                      className="border border-black rounded-sm p-1"
+                    />
+                    <button
+                      onClick={handleSave}
+                      className=" bg-blue-500 text-white bg-blue rounded-sm px-2"
+                    >
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h1>{newPassword}</h1>
+                    <FaRegEdit
+                      className="text-gray-600 cursor-pointer"
+                      onClick={handleEditClick}
+                    />
+                  </>
+                )}
+              </div>
             </div>
             <div className="W-24 flex gap-3">
               <h1 className="font-extrabold">Color :</h1>

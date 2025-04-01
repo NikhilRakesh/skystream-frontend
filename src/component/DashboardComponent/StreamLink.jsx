@@ -7,7 +7,6 @@ import { useSnapshot } from "valtio";
 import { confirmAlert } from "react-confirm-alert";
 import PushValidation from "./PushValidation";
 
-// eslint-disable-next-line react/prop-types
 function StreamLink({ handleClose, view, ...item }) {
   const [copiedStates, setCopiedStates] = useState(Array(5).fill(false));
   const [copied, setCopied] = useState(100);
@@ -103,12 +102,12 @@ function StreamLink({ handleClose, view, ...item }) {
         <div className="w-full h-full py-10 px-10 flex flex-col gap-10">
           <div className="flex flex-col gap-4">
             {[
-              `rtmp://skystream.in${item.streamKey}`,
-              `https://skystream.in${item.streamKey}`,
-              `ws://skystream.in${item.streamKey}.flv`,
-              `https://skystream.in${item.streamKey}/index.m3u8`,
-              `https://skystream.in${item.streamKey}/index.mpd`,
-              `srt://live.skystream.in?streamid=${item.streamKey.replace(/^\/+/, '')}`,
+              `rtmp://${item.domain}${item.streamKey}`,
+              `https://${item.domain}${item.streamKey}`,
+              `ws://${item.domain}${item.streamKey}.flv`,
+              `https://${item.domain}${item.streamKey}/index.m3u8`,
+              `https://${item.domain}${item.streamKey}/index.mpd`,
+              `srt://live.${item.domain}?streamid=${item.streamKey.replace(/^\/+/, '')}`,
             ].map((value, index) => (
               <div key={index} className="relative">
                 <input

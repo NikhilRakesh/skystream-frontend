@@ -19,7 +19,7 @@ function CreateUser({
   useEffect(() => {
     axiosInstance
       .get(`/domain/${snap.userData._id}`)
-      .then((res) => setDomain(res.data.domain))
+      .then((res) => setDomain(res.data.domains))
       .catch((err) => console.log(err));
   }, []);
 
